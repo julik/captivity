@@ -10,10 +10,13 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'rake'
-
 require 'jeweler'
+
+require File.dirname(__FILE__) + "/lib/captivity"
+
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.version = Captivity::VERSION
   gem.name = "captivity"
   gem.homepage = "http://github.com/julik/captivity"
   gem.license = "MIT"
