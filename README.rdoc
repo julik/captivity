@@ -1,6 +1,7 @@
 = captivity
 
-Description goes here.
+Captivity is a simplistick Rack middleware for capturing and logging exceptions. It is a replacement for the CommonLogger
+middleware which I found lacking and abandoned. It's compatible with any Logger implementation.
 
 == Contributing to captivity
  
