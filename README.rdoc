@@ -1,7 +1,20 @@
 = captivity
 
-Captivity is a simplistick Rack middleware for capturing and logging exceptions. It is a replacement for the CommonLogger
-middleware which I found lacking and abandoned. It's compatible with any Logger implementation.
+Captivity is a simplistick Rack middleware for capturing and logging exceptions and requests.
+It atcs like a wrapper for the Rack CommonLogger, but it fixes it's incompatibility
+with the Logger interface (request logs will be logged as INFO messages).
+
+== Usage
+
+In your rackup file, grab a logger (you can configure it dynamically) and feed it to the Captivity middleware
+
+  logger = if ENV['RACK_ENV'] == 'production'
+    Le.new('<YOUR_LOGENTRIES_KEY>', 'myserver/webapp1')
+  else
+    Logger.new(STDERR)
+  end
+  logger.level = Logger::INFO
+  use Captivity, logger
 
 == Contributing to captivity
  
