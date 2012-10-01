@@ -16,6 +16,15 @@ In your rackup file, grab a logger (you can configure it dynamically) and feed i
   logger.level = Logger::INFO
   use Captivity, logger
 
+Then, in your app, use the passed Logger object by using the "captivity.logger" env variable:
+
+  def logger
+    env["captivity.logger"]
+  end
+  
+  ...
+  logger.warn("Bad things are-a happenin'!")
+
 == Contributing to captivity
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.

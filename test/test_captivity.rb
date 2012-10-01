@@ -34,4 +34,19 @@ class TestCaptivity < Test::Unit::TestCase
     assert_match /GET \/boom/, stream.string
   end
   
+  def test_captivity_injects_env_variable
+    stream = StringIO.new
+    
+    @app = Rack::Builder.app do
+       use Captivity, stream
+       inner = lambda do |env|
+         env["captivity.logger"].error("Variable is present!") 
+         [200, {'Content-Type' => 'text/plain'}, 'OK']
+       end
+       run inner
+    end
+    
+    get '/boom'
+    assert_match /Variable is present/, stream.string
+  end
 end
