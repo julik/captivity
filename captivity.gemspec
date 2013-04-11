@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "captivity"
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Julik Tarkhanov"]
-  s.date = "2012-07-08"
+  s.date = "2013-04-11"
   s.description = "A simple logging wrapper for Rack"
   s.email = "me@julik.nl"
   s.extra_rdoc_files = [
