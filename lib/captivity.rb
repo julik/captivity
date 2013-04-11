@@ -3,7 +3,7 @@ require 'logger'
 require 'rack/commonlogger'
 
 class Captivity
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
   
   # Rack::CommonLogger is so ingeniously put together that
   # it does not honor the standard logger levels, it uses #write.
@@ -25,6 +25,7 @@ class Captivity
   # the defined Logger object in the "captivity.logger" of the env hash
   def call(env)
     env["captivity.logger"] = @logger
+    set_active_record_logger_if_present!
     @app.call(env)
   rescue StandardError, LoadError, SyntaxError => exception
     log_exception(exception)
@@ -33,6 +34,12 @@ class Captivity
   end
   
   private
+  
+  def set_active_record_logger_if_present!
+    if defined?(ActiveRecord)
+      ActiveRecord::Base.logger = @logger
+    end
+  end
   
   def log_exception(exception)
     @logger.fatal(
